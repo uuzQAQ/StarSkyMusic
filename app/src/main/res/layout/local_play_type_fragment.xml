@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@mipmap/top_bg"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@mipmap/tag"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="单曲"
+                android:textColor="@drawable/selector_color_type"
+                android:gravity="center"
+                android:id="@+id/tv_one"
+                android:textSize="14sp"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="专辑"
+                android:textColor="@drawable/selector_color_type"
+                android:gravity="center"
+                android:id="@+id/tv_special"
+                android:textSize="14sp"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="歌手"
+                android:textColor="@drawable/selector_color_type"
+                android:gravity="center"
+                android:id="@+id/tv_songer"
+                android:textSize="14sp"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="文件夹"
+                android:textColor="@drawable/selector_color_type"
+                android:gravity="center"
+                android:id="@+id/tv_document"
+                android:textSize="14sp"
+                />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/view_pager"
+        >
+    </android.support.v4.view.ViewPager>
+</LinearLayout>
