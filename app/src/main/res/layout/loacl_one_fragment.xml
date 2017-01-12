@@ -54,7 +54,7 @@
             android:layout_height="20dp"
             android:id="@+id/iv_check"
             android:layout_marginLeft="15dp"
-            android:src="@drawable/selector_check"
+            android:src="@drawable/check"
             />
         
         <TextView

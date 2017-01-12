@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+    >
+
+    <com.edu.feicui.starskymusic.view.CircularSeekBar
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:circle_x_radius="17.5dp"
+        app:circle_y_radius="17.5dp"
+        app:use_custom_radii="true"
+        app:progress="25"
+        app:max="100"
+        app:pointer_alpha_ontouch="100"
+        app:pointer_color="#ffffff"
+        app:pointer_halo_color="#2fffffff"
+        app:circle_color="#5e6e74"
+        app:circle_progress_color="#fff"
+        app:pointer_halo_width="1.5dp"
+        app:pointer_radius="3dp"
+        app:circle_stroke_width="1dp"
+        app:pointer_halo_border_width="0dp"
+        />
+
+</LinearLayout>

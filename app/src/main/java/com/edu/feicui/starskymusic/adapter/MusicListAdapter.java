@@ -50,6 +50,7 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.MyVi
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
+        holder.itemView.setTag(position);
         holder.mTvSongName.setText(list.get(position).getTitle());
         holder.mTvSongerName.setText(list.get(position).getArtist());
         holder.mIvTailItem.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +68,12 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.MyVi
 
         //监听用于 显示全选等东西
         //监听item点击监听
+//        holder.mLiListItem.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                itemClickListener.onItemClick(holder.itemView, (Integer) holder.itemView.getTag());
+//            }
+//        });
     }
 
     @Override
@@ -94,10 +101,23 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.MyVi
         TextView mTvTailShare;
         @BindView(R.id.ll_tail)
         LinearLayout mLlTail;
+        @BindView(R.id.ll_list_item)
+        LinearLayout mLiListItem;
 
 
         public MyViewHolder(View itemView) {
             super(itemView);
         }
     }
+
+
+    public  interface onRecyclerViewItemClickListener {
+
+        void onItemClick(View v, int position);
+    }
+
+    public void setOnItemClickListener(onRecyclerViewItemClickListener listener) {
+        this.itemClickListener = listener;
+    }
+    private onRecyclerViewItemClickListener itemClickListener = null;
 }
