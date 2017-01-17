@@ -25,6 +25,7 @@ import com.edu.feicui.starskymusic.entity.MusicBean;
 import com.edu.feicui.starskymusic.fragment.LocalHomeFragment;
 import com.edu.feicui.starskymusic.service.MusicService;
 import com.edu.feicui.starskymusic.view.CircularSeekBar;
+import com.edu.feicui.starskymusic.view.SongNameTextView;
 
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
@@ -46,7 +47,7 @@ public class LocalActivity extends AppCompatActivity {
     @BindView(R.id.fl_content)
     FrameLayout mFlContent;
     @BindView(R.id.tv_music_name)
-    TextView mTvMusicName;
+    SongNameTextView mTvMusicName;
     @BindView(R.id.iv_play)
     ImageView mIvPlay;
     @BindView(R.id.seek_bar)
@@ -85,12 +86,15 @@ public class LocalActivity extends AppCompatActivity {
         transaction.add(R.id.fl_content, mLocalHomeFragment, "LocalHomeFragment");
         transaction.commit();
 
+        mTvMusicName.setFocusable(true);
+        mTvMusicName.requestFocus();
+
         getMusInfoAndStService();
         seekTime();
         forSeekBar();
     }
 
-    @OnClick({R.id.iv_sliding_menu, R.id.tv_net, R.id.tv_local, R.id.iv_play, R.id.iv_more})
+    @OnClick({R.id.iv_sliding_menu, R.id.tv_net, R.id.tv_local, R.id.iv_play, R.id.iv_more,R.id.play_status_bar})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_sliding_menu:
@@ -112,6 +116,13 @@ public class LocalActivity extends AppCompatActivity {
                 break;
             case R.id.iv_more:
                 break;
+            case R.id.play_status_bar:
+                Intent intent = new Intent(LocalActivity.this,PlayActivity.class);
+                intent.putParcelableArrayListExtra("MUSIC_LIST",musicBeanList);
+                intent.putExtra("CURRENT_POSITION",callBack.callCurrentPos());
+                intent.putExtra("CURRENT_TIME",callBack.callCurrentTime());
+                startActivity(intent);
+                break;
         }
     }
 
@@ -130,11 +141,22 @@ public class LocalActivity extends AppCompatActivity {
 
                 int currentTime = activity.callBack.callCurrentTime();
                 int totalTime = activity.callBack.callTotalDate();
+                String musicName = activity.callBack.callMusicName();
+                boolean isplay = activity.callBack.isPlayering();
+
+                if(isplay){
+                    activity.mIvPlay.setImageResource(R.drawable.pause3);
+                }else{
+                    activity.mIvPlay.setImageResource(R.drawable.play3);
+                }
+
                 activity.mSeekBar.setMax(totalTime);
                 activity.mSeekBar.setProgress(currentTime);
+                activity.mTvMusicName.setText(musicName);
 
                 String current = activity.format.format(new Date(currentTime));
                 String total = activity.format.format(new Date(totalTime));
+
 
 //                activity.currentTimeTxt.setText(current);
 //                activity.totalTimeTxt.setText(total);
@@ -165,12 +187,6 @@ public class LocalActivity extends AppCompatActivity {
 //        seekTime();
 //        forSeekBar();
 //    }
-
-    private void initData() {
-//        bt_play.setOnClickListener(this);
-//        bt_pre.setOnClickListener(this);
-//        bt_next.setOnClickListener(this);
-    }
 
     private void getMusInfoAndStService() {
         /** 接收音乐列表资源 */
@@ -252,22 +268,6 @@ public class LocalActivity extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            // 播放或者暂停
-//            case R.id.bt_play:
-//                playerMusicByIBinder();
-//                break;
-//            case R.id.bt_pre:
-//                callBack.isPlayPre();
-//                break;
-//            case R.id.bt_next:
-//                callBack.isPlayNext();
-//                break;
-//
-//        }
-//    }
 
     /**
      * 播放音乐通过Binder接口实现

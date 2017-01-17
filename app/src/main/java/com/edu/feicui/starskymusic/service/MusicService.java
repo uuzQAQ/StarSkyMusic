@@ -11,6 +11,7 @@ import com.edu.feicui.starskymusic.entity.MusicBean;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by user on 2017/1/11.
@@ -23,6 +24,10 @@ public class MusicService extends Service {
     private MediaPlayer mPlayer;
     private ArrayList<MusicBean> musicPathLists;
     private int currentPos;
+    private int prevPos;
+    private int currentTime;
+    private boolean isRandom;
+
 
     public interface CallBack {
         boolean isPlayerMusic();//开始或者暂停
@@ -32,6 +37,11 @@ public class MusicService extends Service {
         void isPlayPre();//上一首
         void isPlayNext();//下一首
         boolean isPlayering();//是否播放状态
+        String callMusicName();//获取歌曲名
+        String callArtist();//获取艺术家
+        int callCurrentPos();//获取当前是第几首
+        String callImage();
+        void randomMusic(boolean isRandom);
     }
 
     public class MyBinder extends Binder implements CallBack {
@@ -53,6 +63,10 @@ public class MusicService extends Service {
         @Override
         public int callCurrentTime() {
             if (mPlayer != null) {
+                if(currentTime != 0 && currentTime > mPlayer.getCurrentPosition()){
+                    mPlayer.seekTo(currentTime);
+                    currentTime = 0;
+                }
                 return mPlayer.getCurrentPosition();
             } else {
                 return 0;
@@ -69,7 +83,7 @@ public class MusicService extends Service {
         @Override
         public void isPlayPre() {
             if (--currentPos < 0) {
-                currentPos = 0;
+                currentPos = musicPathLists.size() - 1;
             }
             initMusic();
             playerMusic();
@@ -78,7 +92,7 @@ public class MusicService extends Service {
         @Override
         public void isPlayNext() {
             if (++currentPos > musicPathLists.size() - 1) {
-                currentPos = musicPathLists.size() - 1;
+                currentPos = 0;
             }
             initMusic();
             playerMusic();
@@ -93,6 +107,46 @@ public class MusicService extends Service {
             }
         }
 
+        @Override
+        public String callMusicName() {
+            if(mPlayer != null && musicPathLists != null){
+                return musicPathLists.get(currentPos).getTitle();
+            }else{
+                return "无播放歌曲";
+            }
+        }
+
+        @Override
+        public String callArtist() {
+            if(mPlayer != null && musicPathLists != null){
+                return musicPathLists.get(currentPos).getArtist();
+            }else{
+                return "无";
+            }
+        }
+
+        @Override
+        public int callCurrentPos() {
+            if(mPlayer != null && musicPathLists != null){
+                return currentPos;
+            }else{
+                return 0;
+            }
+        }
+
+        @Override
+        public String callImage() {
+            if(mPlayer != null && musicPathLists != null){
+                return musicPathLists.get(currentPos).getImage();
+            }else{
+                return "";
+            }
+        }
+
+        @Override
+        public void randomMusic(boolean isRandoms) {
+            isRandom = isRandoms;
+        }
     }
 
     @Override
@@ -104,6 +158,10 @@ public class MusicService extends Service {
     private void initMusic() {
         // 根路径
         //      String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tmd.mp3";
+
+        if(musicPathLists == null){
+            return;
+        }
         mPlayer.reset();
         try {
             mPlayer.setDataSource(musicPathLists.get(currentPos).getMusicPath());
@@ -112,7 +170,21 @@ public class MusicService extends Service {
             mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {//播放完一首重写初始化
                 @Override
                 public void onCompletion(MediaPlayer mp) {
-                    currentPos++;
+                    prevPos = currentPos;
+                    if(isRandom){//随机播放
+                        int random = new Random().nextInt(musicPathLists.size());
+                        while(prevPos < -1){
+                            if(prevPos == random){
+                                random = new Random().nextInt(musicPathLists.size());
+                                continue;
+                            }
+                            break;
+                        }
+                        currentPos = random;
+                    }else{
+                        currentPos++;
+                    }
+
                     if (currentPos >= musicPathLists.size()) {
                         currentPos = 0;
                     }
@@ -142,6 +214,7 @@ public class MusicService extends Service {
 
         musicPathLists = intent.getParcelableArrayListExtra("MUSIC_LIST");
         currentPos = intent.getIntExtra("CURRENT_POSITION", -1);
+        currentTime = intent.getIntExtra("CURRENT_TIME",0);
 
         initMusic();
 

@@ -60,7 +60,7 @@
         android:id="@+id/fl_content"
         >
     </FrameLayout>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -68,7 +68,7 @@
         android:background="@mipmap/bottom_bg"
         android:id="@+id/play_status_bar"
         >
-        
+
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -85,15 +85,19 @@
             android:layout_marginLeft="15dp"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.edu.feicui.starskymusic.view.SongNameTextView
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:text="安和桥 - 宋冬野"
+                android:text="无播放歌曲"
                 android:textColor="#fff"
                 android:layout_marginBottom="7dp"
                 android:layout_marginTop="20dp"
                 android:id="@+id/tv_music_name"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:focusableInTouchMode="true"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -102,6 +106,7 @@
                 android:text="暂无歌词"
                 android:textColor="#6a7578"
                 android:layout_gravity="left"
+                android:layout_marginBottom="5dp"
                 />
 
 

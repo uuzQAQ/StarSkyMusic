@@ -27,14 +27,15 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.MyVi
 
 
     private Context context;
-    private List<MusicBean> list = new ArrayList<>();
+    private ArrayList<MusicBean> list = new ArrayList<>();
     private boolean isShowTail = false;
+//    private int mPlayingPosition;
 
     public MusicListAdapter(Context context) {
         this.context = context;
     }
 
-    public void setList(List<MusicBean> list) {
+    public void setList(ArrayList<MusicBean> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -68,12 +69,12 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.MyVi
 
         //监听用于 显示全选等东西
         //监听item点击监听
-//        holder.mLiListItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                itemClickListener.onItemClick(holder.itemView, (Integer) holder.itemView.getTag());
-//            }
-//        });
+        holder.mLiListItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClickListener.onItemClick(holder.itemView, (Integer) holder.itemView.getTag());
+            }
+        });
     }
 
     @Override
@@ -120,4 +121,9 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.MyVi
         this.itemClickListener = listener;
     }
     private onRecyclerViewItemClickListener itemClickListener = null;
+
+//    public void setPlayingPosition(int position) {
+//        mPlayingPosition = position;
+//        notifyDataSetChanged();
+//    }
 }

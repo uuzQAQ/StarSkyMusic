@@ -1,5 +1,6 @@
 package com.edu.feicui.starskymusic.fragment;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.edu.feicui.starskymusic.R;
+import com.edu.feicui.starskymusic.activity.LocalActivity;
 import com.edu.feicui.starskymusic.adapter.MusicListAdapter;
 import com.edu.feicui.starskymusic.entity.MusicBean;
 import com.edu.feicui.starskymusic.view.Mylayout;
@@ -35,11 +37,11 @@ import butterknife.Unbinder;
  * Created by user on 2017/1/10.
  */
 
-public class LocalOneFragment extends Fragment {
+public class LocalOneFragment extends Fragment implements MusicListAdapter.onRecyclerViewItemClickListener{
 
     private Unbinder mUnbinder;
     private Handler mHandler = new Handler();
-    private List<MusicBean> mMediaLists = new ArrayList<>();
+    private ArrayList<MusicBean> mMediaLists = new ArrayList<>();
     private MusicListAdapter adapter;
     View view;
 
@@ -70,7 +72,7 @@ public class LocalOneFragment extends Fragment {
         adapter = new MusicListAdapter(getContext());
         mRvOne.setLayoutManager(new Mylayout(getContext()));
         mRvOne.setAdapter(adapter);
-
+        adapter.setOnItemClickListener(this);
         asyncQueryMedia();
         return view;
     }
@@ -180,5 +182,14 @@ public class LocalOneFragment extends Fragment {
                 });
             }
         }).start();
+    }
+
+    @Override
+    public void onItemClick(View v, int position) {
+        Intent intent = new Intent(getContext(),LocalActivity.class);
+        intent.putParcelableArrayListExtra("MUSIC_LIST", mMediaLists);
+        intent.putExtra("CURRENT_POSITION", position);
+
+        startActivity(intent);
     }
 }
