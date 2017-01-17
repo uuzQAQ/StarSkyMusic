@@ -7,33 +7,42 @@
               android:orientation="vertical"
     >
 
-    <!--<TextView-->
-        <!--android:id="@+id/myTextView"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:ellipsize="marquee"-->
-        <!--android:focusable="true"-->
-        <!--android:marqueeRepeatLimit="marquee_forever"-->
-        <!--android:singleLine="true"-->
-        <!--android:text="文本区域"-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:focusableInTouchMode="true"-->
-        <!--&gt;-->
-    <!--</TextView>-->
-
     <TextView
+        android:id="@+id/myTextView"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="文本区域"
+        android:textColor="@android:color/black"
+        >
+    </TextView>
+
+    <com.edu.feicui.starskymusic.view.SongNameTextView
         android:id="@+id/tv_music_name"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="7dp"
         android:layout_marginTop="20dp"
         android:ellipsize="marquee"
-        android:focusable="true"
         android:marqueeRepeatLimit="marquee_forever"
         android:singleLine="true"
-        android:text="无播放歌曲66666666666666666666666666666"
         android:focusableInTouchMode="true"
+        android:text="无播放歌曲6666666666666666666666666666"
+        android:textColor="#fff"
+        android:textSize="14sp"
+        />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:id="@+id/et"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ok"
+        android:id="@+id/btn"
         />
 
     <!--<com.edu.feicui.starskymusic.view.CircularSeekBar-->
@@ -56,5 +65,28 @@
         <!--app:end_angle="245.0"-->
         <!--app:use_custom_radii="true"-->
         <!--/>-->
+
+    <com.edu.feicui.starskymusic.view.CircularSeekBar
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        app:circle_x_radius="18dp"
+        app:circle_y_radius="18dp"
+        app:use_custom_radii="true"
+        app:progress="25"
+        app:max="100"
+        app:pointer_alpha_ontouch="100"
+        app:pointer_color="#ffffff"
+        app:pointer_halo_color="#2fffffff"
+        app:circle_color="#5e6e74"
+        app:circle_progress_color="#fff"
+        app:pointer_halo_width="1.5dp"
+        app:pointer_radius="3dp"
+        app:circle_stroke_width="1dp"
+        app:pointer_halo_border_width="0dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:layout_gravity="center"
+        android:id="@+id/seek_bar"
+        />
 
 </LinearLayout>

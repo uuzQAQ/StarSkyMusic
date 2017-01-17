@@ -1,112 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="#fff"
+              android:orientation="vertical"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:orientation="horizontal"
         android:background="@mipmap/top_bg"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         >
+
         <ImageView
+            android:id="@+id/iv_sliding_menu"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/top_sliding"
-            android:id="@+id/iv_sliding_menu"
             android:layout_marginLeft="10dp"
+            android:src="@mipmap/top_sliding"
             />
 
         <TextView
+            android:id="@+id/tv_net"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="音乐库"
-            android:textSize="18sp"
-            android:textColor="#d5d5d5"
             android:layout_weight="1"
             android:gravity="right"
             android:paddingRight="30dp"
-            android:id="@+id/tv_net"
+            android:text="音乐库"
+            android:textColor="#d5d5d5"
+            android:textSize="18sp"
             />
+
         <TextView
+            android:id="@+id/tv_local"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我的"
-            android:textSize="22sp"
-            android:textColor="#ffffff"
             android:layout_weight="1"
-            android:id="@+id/tv_local"
+            android:text="我的"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
             />
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@mipmap/top_search"
             android:layout_marginRight="10dp"
+            android:src="@mipmap/top_search"
             />
 
 
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/fl_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:id="@+id/fl_content"
         >
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/play_status_bar"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:orientation="horizontal"
         android:background="@mipmap/bottom_bg"
-        android:id="@+id/play_status_bar"
+        android:orientation="horizontal"
         >
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@mipmap/bottom_disk"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
+            android:src="@mipmap/bottom_disk"
             />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
             android:layout_marginLeft="15dp"
+            android:gravity="center"
+            android:orientation="vertical"
             >
 
             <com.edu.feicui.starskymusic.view.SongNameTextView
-                android:layout_width="80dp"
+                android:id="@+id/tv_music_name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:text="无播放歌曲"
-                android:textColor="#fff"
                 android:layout_marginBottom="7dp"
                 android:layout_marginTop="20dp"
-                android:id="@+id/tv_music_name"
                 android:ellipsize="marquee"
+                android:focusableInTouchMode="true"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:singleLine="true"
-                android:focusableInTouchMode="true"
+                android:text="无播放歌曲"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:scrollHorizontally="true"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:text="暂无歌词"
-                android:textColor="#6a7578"
                 android:layout_gravity="left"
                 android:layout_marginBottom="5dp"
+                android:text="暂无歌词"
+                android:textColor="#6a7578"
+                android:textSize="12sp"
                 />
 
 
@@ -117,129 +122,132 @@
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="70dp"
+            android:layout_marginTop="10dp"
             >
 
             <com.edu.feicui.starskymusic.view.CircularSeekBar
+                android:id="@+id/seek_bar"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                app:circle_color="#5e6e74"
+                app:circle_progress_color="#fff"
+                app:circle_stroke_width="1dp"
                 app:circle_x_radius="18dp"
                 app:circle_y_radius="18dp"
-                app:use_custom_radii="true"
-                app:progress="25"
                 app:max="100"
                 app:pointer_alpha_ontouch="100"
                 app:pointer_color="#ffffff"
+                app:pointer_halo_border_width="0dp"
                 app:pointer_halo_color="#2fffffff"
-                app:circle_color="#5e6e74"
-                app:circle_progress_color="#fff"
                 app:pointer_halo_width="1.5dp"
                 app:pointer_radius="3dp"
-                app:circle_stroke_width="1dp"
-                app:pointer_halo_border_width="0dp"
-                android:scaleX="1.2"
-                android:scaleY="1.2"
-                android:layout_gravity="center"
-                android:id="@+id/seek_bar"
+                app:progress="25"
+                app:use_custom_radii="true"
                 />
 
             <ImageView
+                android:id="@+id/iv_play"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/play3"
                 android:layout_gravity="center"
-                android:id="@+id/iv_play"
+                android:src="@drawable/play3"
                 />
-
 
 
         </FrameLayout>
 
         <ImageView
+            android:id="@+id/iv_more"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@mipmap/bottom_more_music"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="25dp"
-            android:id="@+id/iv_more"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/bottom_more_music"
             />
 
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_music_manager"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="vertical"
         android:background="@mipmap/bottom_bg2"
-        android:id="@+id/ll_music_manager"
+        android:orientation="vertical"
         android:visibility="gone"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingTop="5dp"
             >
-            
+
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@mipmap/manager_add_list"
-                android:layout_weight="1"
                 android:id="@+id/iv_add_list"
-                />
-            <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@mipmap/manager_delete"
                 android:layout_weight="1"
+                android:src="@mipmap/manager_add_list"
+                />
+
+            <ImageView
                 android:id="@+id/iv_delete"
-                />
-            <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@mipmap/manager_add_song_table"
                 android:layout_weight="1"
-                android:id="@+id/iv_add_table"
+                android:src="@mipmap/manager_delete"
                 />
-            
+
+            <ImageView
+                android:id="@+id/iv_add_table"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:src="@mipmap/manager_add_song_table"
+                />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingTop="3dp"
             >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="加载列表"
-                android:layout_weight="1"
-                android:gravity="center"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="删除"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginLeft="12dp"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="加到歌单"
+                android:layout_marginLeft="12dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_marginLeft="12dp"
+                android:text="加到歌单"
                 />
 
         </LinearLayout>

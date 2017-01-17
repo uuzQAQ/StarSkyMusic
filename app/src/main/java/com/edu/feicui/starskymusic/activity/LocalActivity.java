@@ -14,6 +14,7 @@ import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -205,7 +206,8 @@ public class LocalActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        mTvMusicName.setFocusable(true);
+        mTvMusicName.requestFocus();
     }
 
     @Override
@@ -293,4 +295,6 @@ public class LocalActivity extends AppCompatActivity {
         stopService(intent);
         mFlag = false;
     }
+
+
 }
